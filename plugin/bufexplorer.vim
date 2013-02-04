@@ -565,8 +565,13 @@ endfunction
 
 " GetBufferInfo {{{2
 function! s:GetBufferInfo(bufnr)
+	let buf_list_cmd = 'buffers'
+	if (g:bufExplorerShowUnlisted)
+		let buf_list_cmd .='!'
+	endif
+
     redir => bufoutput
-    buffers!
+    exec buf_list_cmd
     redir END
 
     if (a:bufnr > 0)
